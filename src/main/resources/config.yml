@@ -1,0 +1,4 @@
+permissions:
+  prtpo: "ProRTPO.rtpo"
+  prtpoReload: "ProRTPO.rtpo.reload"
+logRTPO: true

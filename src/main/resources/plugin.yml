@@ -1,0 +1,6 @@
+name: ProRTPO
+version: ${project.version}
+main: me.prosl3nderman.prortpo.ProRTPO
+commands:
+  prtpo:
+    description: Teleports the user to a random player.
