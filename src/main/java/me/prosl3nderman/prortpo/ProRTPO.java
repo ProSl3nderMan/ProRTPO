@@ -3,27 +3,28 @@ package me.prosl3nderman.prortpo;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public final class ProRTPO extends JavaPlugin {
 
     private static ProRTPO plugin;
+    public HashMap<UUID, List<String>> alreadyTpedTo = new HashMap<>();
 
     @Override
     public void onEnable() {
         plugin = this;
 
         getCommand("prtpo").setExecutor(new PRTPOCommand());
+        getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), plugin);
 
         doConfig();
     }
 
     @Override
     public void onDisable() {
-        String dir = getDataFolder() + File.separator + "staff";
-        if (new File(dir).exists()) {
-            for (File f : new File(dir).listFiles())
-                f.delete();
-        }
+        alreadyTpedTo.clear();
     }
 
     private void doConfig() {
