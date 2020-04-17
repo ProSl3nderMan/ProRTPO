@@ -27,7 +27,7 @@ public class PRTPOCommand implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-        if (!p.hasPermission(ProRTPO.getInstance().getConfig().getString("permissions.prtpo"))) {
+        if (!p.hasPermission(ProRTPO.getInstance().rtpoPermission())) {
             p.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
             return true;
         }
@@ -74,6 +74,7 @@ public class PRTPOCommand implements CommandExecutor {
             }
             ProRTPO.getInstance().saveDefaultConfig(); //reloads config.yml
             ProRTPO.getInstance().reloadConfig(); //reloads config.yml
+            ProRTPO.getInstance().refreshVariables();
             p.sendMessage(ChatColor.GREEN + "/ProRTPO/config.yml has been reloaded!");
             return true;
         }
@@ -116,7 +117,7 @@ public class PRTPOCommand implements CommandExecutor {
     }
 
     private void logRTPO(String staff, String playerTpedTo) { //logs the random tpo if it is enabled to do so in config.yml.
-        if (ProRTPO.getInstance().getConfig().getBoolean("logRTPO")) {
+        if (ProRTPO.getInstance().logRTPOS()) {
             Bukkit.getLogger().log(Level.INFO, "[ProRTPO] Staff member '" + staff + "' has randomly tped to '" + playerTpedTo + "'!");
         }
     }

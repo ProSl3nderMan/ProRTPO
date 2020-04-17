@@ -11,6 +11,8 @@ public final class ProRTPO extends JavaPlugin {
 
     private static ProRTPO plugin;
     public HashMap<UUID, List<String>> alreadyTpedTo = new HashMap<>();
+    private boolean logRTPOs = true;
+    private String rtpoPermission = "ProRTPO.rtpo";
 
     @Override
     public void onEnable() {
@@ -20,6 +22,8 @@ public final class ProRTPO extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerLeaveEvent(), plugin);
 
         doConfig();
+
+        refreshVariables();
     }
 
     @Override
@@ -43,6 +47,19 @@ public final class ProRTPO extends JavaPlugin {
             e.printStackTrace();
 
         }
+    }
+
+    public boolean logRTPOS() {
+        return logRTPOs;
+    }
+
+    public String rtpoPermission() {
+        return rtpoPermission;
+    }
+
+    public void refreshVariables() {
+        logRTPOs = getConfig().getBoolean("logRTPO");
+        rtpoPermission = getConfig().getString("permissions.prtpo");
     }
 
     public static ProRTPO getInstance() {
